@@ -17,7 +17,7 @@ export default function Page() {
   const [transactionSignature, setTransactionSignature] = useState('');
 
   const { connected, publicKey } = useWallet();
-  const connection = new Connection(process.env.NEXT_PUBLIC_RPC_URL!);
+  const connection = new Connection(process.env.NEXT_PUBLIC_DEVNET_RPC_URL!);
   let toastIdBalance: string | number;
 
   const handleShowBalance = () => {
@@ -70,6 +70,10 @@ export default function Page() {
         toast.dismiss(toastID);
         toast.success(`Airdrop of ${amount} Completed `);
         setTransactionSignature(signature);
+
+        if (amount) {
+          setShowBalance(!showBalance);
+        }
       } else {
         toast.dismiss(toastID);
         toast.warning('Transaction not confirmed in time', {
