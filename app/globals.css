@@ -72,3 +72,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+.wallet-adapter-button {
+  @apply bg-red-500 rounded-xl font-mono text-sm; /* etc */
+}
+.wallet-adapter-button-dropdown {
+  @apply rounded-xl font-mono text-sm hover:pointer-events-auto absolute; /* etc */
+}
+.wallet-adapter-button[disabled] {
+  @apply rounded-xl font-mono text-sm bg-stone-600 text-gray-50; /* etc */
+}
+
+.wallet-adapter-button:not([disabled]):hover {
+  @apply bg-red-200 font-mono;
+}

@@ -50,6 +50,17 @@ const config: Config = {
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))',
         },
+        peach: {
+          100: '#FFE5D0', // Lightest peach
+          200: '#FFD1B3', // Very light peach
+          300: '#FFBC96', // Light peach
+          400: '#FFA67A', // Peach
+          500: '#FF8F5E', // Base peach
+          600: '#FF7842', // Dark peach
+          700: '#FF6036', // Darker peach
+          800: '#E6532C', // Even darker peach
+          900: '#CC4622', // Darkest peach
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',

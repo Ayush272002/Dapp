@@ -2,11 +2,17 @@
 
 import { Button } from '@/components/ui/button';
 import { slides } from '@/lib/slides';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, ExternalLink, Wallet } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { toast } from 'sonner';
+import Cookies from 'js-cookie';
+import WalletButtons from '@/components/WalletButtons';
+import AuthenticationModal from '@/components/AuthenticationModal';
 
 export default function Home() {
+  const { connected } = useWallet();
   const router = useRouter();
   const [currentSlide, setCurrentSlide] = useState(1);
 
@@ -14,6 +20,30 @@ export default function Home() {
   const nextSlide = () => setCurrentSlide((prev) => (prev % totalSlides) + 1);
   const prevSlide = () =>
     setCurrentSlide((prev) => ((prev - 2 + totalSlides) % totalSlides) + 1);
+  const [authenticated, setAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const firstVisit = sessionStorage.getItem('firstVisit');
+    if (!firstVisit) {
+      toast('Welcome to Mint Matrix', {
+        description: 'Learn and earn with Web3 technologies',
+      });
+      sessionStorage.setItem('firstVisit', 'true');
+    }
+  }, []);
+
+  useEffect(() => {
+    if (connected) {
+      toast('Wallet Connected');
+      const authCookie = Cookies.get('authSign');
+      if (authCookie) {
+        setAuthenticated(true);
+      } else {
+        setAuthenticated(false);
+        toast('Please authenticate to continue');
+      }
+    }
+  }, [connected]);
 
   return (
     <div className="min-h-screen bg-stone-100 text-stone-900 p-8 font-sans">
@@ -44,9 +74,13 @@ export default function Home() {
               </a>
             </nav>
           </div>
+          <WalletButtons />
         </header>
 
         <main className="p-6 relative z-10">
+          {connected && !authenticated && (
+            <AuthenticationModal setIsAuthenticated={setAuthenticated} />
+          )}
           <h1
             className="text-5xl font-bold mb-6 tracking-tighter text-center"
             style={{ fontFamily: "'Noto Sans JP', sans-serif" }}
@@ -95,8 +129,7 @@ export default function Home() {
         </main>
 
         <footer
-          // change the color of the footer to match the background
-          className={`p-6 border-t border-stone-200 text-center text-sm text-stone-600 relative `}
+          className={`p-6 border-t border-stone-200 text-center text-sm text-stone-600 relative font-mono`}
         >
           <span>
             Made by{' '}
