@@ -165,7 +165,7 @@ export default function AuthenticationModal({
               </button>
             </div>
             <p className="text-gray-500 text-xs mt-4 text-center">
-              By connecting your wallet, you agree to MintMatrix&apos;s Terms of
+              By connecting your wallet, you agree to SolFlare&apos;s Terms of
               Service.
             </p>
           </div>

@@ -25,7 +25,7 @@ export default function Home() {
   useEffect(() => {
     const firstVisit = sessionStorage.getItem('firstVisit');
     if (!firstVisit) {
-      toast('Welcome to Mint Matrix', {
+      toast('Welcome to SolFlare', {
         description: 'Learn and earn with Web3 technologies',
       });
       sessionStorage.setItem('firstVisit', 'true');
