@@ -19,6 +19,18 @@ export const metadata: Metadata = {
   title: 'SolFlare',
   description:
     'This decentralized application allows users to effortlessly airdrop SOL tokens on the Solana Devnet. With a user-friendly interface, you can manage your tokens, send them to other users, and view real-time information about your assets.',
+  icons: [
+    {
+      rel: 'icon',
+      type: 'image/x-icon',
+      url: '/favicon.ico',
+    },
+    {
+      rel: 'icon',
+      type: 'image/x-icon',
+      url: '/favicon.svg',
+    },
+  ],
 };
 
 export default function RootLayout({
